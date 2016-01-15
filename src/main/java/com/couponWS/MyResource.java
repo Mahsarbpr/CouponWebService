@@ -134,6 +134,40 @@ public class MyResource {
 		    	} 
 	 return Response.ok().build();
 	 }
+	 @DELETE
+	 @Path("DeleteCoupons")
+	 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+//	 @Produces(MediaType.)
+	 public Response DeleteCoupons(@FormParam("vartime1") String ValidTime1){//(@FormParam("DelVar") String CouponID){	
+		System.out.println(ValidTime1);
+		 if(ValidTime1!="" && ValidTime1!=null){
+			 Date datevar=null; 
+			 java.sql.Date datevar1=null;
+			 try {
+					datevar = new SimpleDateFormat("yyyy-MM-dd").parse(ValidTime1);
+					datevar1 = new java.sql.Date(datevar.getTime());
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		
+		 PreparedStatement stmt = null;
+		    	DB database = new DB();
+		    	try {
+		    		Connection c= database.connect();
+					String query = "DELETE FROM coupon WHERE coupon.time2<= ?";
+					stmt = (PreparedStatement)c.prepareStatement(query);
+					stmt.setDate(1, datevar1);
+					stmt.executeUpdate();
+		    	}
+		    	catch(SQLException e)
+		    	{
+		    		e.printStackTrace();
+		    		System.out.println("sql erroooooor");
+		    	} 
+		 }
+	 return Response.ok().build();
+	 }
 //Upload a coupon file
 /*	 @POST
 	 @Path("UploadCouponFile")
@@ -444,11 +478,11 @@ public List<Coupon> Checkcoupons4(@QueryParam("var") String var){
 	Date datevar=new Date();
 	java.sql.Date datevar1=null;
 	try {
-		System.out.println(datevar+"this this this");
+	//	System.out.println(datevar+"this this this");
 		datevar1 = new java.sql.Date(datevar.getTime());
 	} catch (Exception e1) {
 		// TODO Auto-generated catch block
-		System.out.println("date date date error");
+		//System.out.println("date date date error");
 		e1.printStackTrace();
 	}
 	System.out.print(datevar1);
