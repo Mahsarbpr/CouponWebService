@@ -28,22 +28,7 @@ public class CouponClientTest {
 		System.out.println(c);
 		assertNotNull(c);
 	}
-	/*@Test
-	public void testGetTime(){
-		CouponClient client=new CouponClient();
-		Coupon c=client.GetTime("13");
-		Coupon c2=new Coupon();
-		c2.setCouponID(13);
-		c2.setDiscount(0.3);
-		c2.setCouponType(1);
-		c2.setItemname("item3");
-		Date d1= new Date();
-		d1.setYear(2014);
-		c2.setValidTime1(format1);
-		System.out.println(c);
-		assertNotNull(c);
-		//fail("Not yet implemented");
-	}*/
+
 	@Test
 	public void testFindCouponByTime(){
 		CouponClient client=new CouponClient();
